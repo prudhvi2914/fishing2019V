@@ -13,36 +13,33 @@ class GameScene: SKScene {
     
     
     
-    var boat: SKSpriteNode!
+    var boatnode: SKSpriteNode!
     var hook: SKSpriteNode!
   
-    
     
 
     
     override func didMove(to view: SKView) {
         
-        self.hanger = self.childNode(withName: "hook") as! SKSpriteNode
-               self.play = self.childNode(withName: "boat") as! SKSpriteNode
+        self.hook = self.childNode(withName: "hook") as! SKSpriteNode
+               self.boatnode = self.childNode(withName: "boat") as! SKSpriteNode
         
         
     }
-     var fish:[SKSpriteNode] = []
-      
+
+
            }
    
     
     override func update(_ currentTime: TimeInterval) {
-     }
+  
+        
+        }
     
  
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-       
-               
-               
-               
-           }
+     
         
         
         
