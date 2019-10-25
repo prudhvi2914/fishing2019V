@@ -14,19 +14,27 @@ class GameScene: SKScene {
     
     var bgsky: SKSpriteNode!
     var ship: SKSpriteNode!
+    var coi: SKSpriteNode!
+
     var hook: SKSpriteNode!
     var ocean: SKSpriteNode!
     var gameIsRunnig = false
     var oceanmoving:String = ""
     var numloops = 0
-    
-    
+    var scoreLabel:SKLabelNode!
+    var coinsLabel:SKLabelNode!
+    var highscoreLabel:SKLabelNode!
+
+
+        
     //-----------------
     var background: SKSpriteNode!
     var backgroundYpos = 0
     var backgroundUpSide = 0
     
-    
+    var score = 0
+    var coins = 0
+    var highscore = 1000
 //    var backgroundSpeed: CGFloat = 80.0 // speed may vary as you like
 //    var deltaTime: TimeInterval = 0
 //    var lastUpdateTimeInterval: TimeInterval = 0
@@ -34,125 +42,57 @@ class GameScene: SKScene {
     let HANGER_SPEED:CGFloat = 1
     let ALLFISH_SPEED:CGFloat = 80
     let SPRITE_SPEED:CGFloat = 3
-
+    let randomX = CGFloat.random(in: -400 ... -300)
+               let randomY = CGFloat.random(in: -1000 ... -200)
     
-
-    //----------------
-    //func setUpBackgrounds() {
-    //add background
-
-//    for i in 0..<3 {
-//        // add backgrounds, my images were namely, bg-0.png, bg-1.png, bg-2.png
-//
-//        let background = SKSpriteNode(imageNamed: "ocean1")
-//        background.anchorPoint = CGPoint.zero
-//        background.position = CGPoint(x: CGFloat(i) * size.height, y: 650)
-//        background.size = self.size
-//        background.zPosition = -5
-//        background.name = "Background"
-//        self.addChild(background)
-//
-//    }
-//
-//    for i in 0..<3 {
-//        // I have used one ground image, you can use 3
-//        let ground = SKSpriteNode(imageNamed: "ocean2")
-//        ground.anchorPoint = CGPoint(x: 0, y: 0)
-//        ground.size = CGSize(width: self.size.width, height: ground.size.height)
-//        ground.position = CGPoint(x: CGFloat(i) * size.width, y: 0)
-//        ground.zPosition = 1
-//        ground.name = "ground"
-//        self.addChild(ground)
-//
-//    }
- //   }
-    
-    
-    
-    //----moving backgrounds
-//    func updateBackground() {
-//        self.enumerateChildNodes(withName: "Background") { (node, stop) in
-//
-//            if let back = node as? SKSpriteNode {
-//                let move = CGPoint(x: -self.backgroundSpeed * CGFloat(self.deltaTime), y: 0)
-//                back.position += move
-//
-//                if back.position.x < -back.size.width {
-//                    back.position += CGPoint(x: back.size.width * CGFloat(3), y: 0)
-//                }
-//            }
-//
-//        }
-//    }
-//
-//    func updateGroundMovement() {
-//        self.enumerateChildNodes(withName: "ground") { (node, stop) in
-//
-//            if let back = node as? SKSpriteNode {
-//                let move = CGPoint(x: -self.backgroundSpeed * CGFloat(self.deltaTime), y: 0)
-//                back.position += move
-//
-//                if back.position.x < -back.size.width {
-//                    back.position += CGPoint(x: back.size.width * CGFloat(3), y: 0)
-//                }
-//            }
-//
-//        }
-//    }
-//    //-------
-    //-------
 //MARK: didmove
     override func didMove(to view: SKView) {
-        createGrounds()
+        
+        
+        
+      //  createGrounds()
        // setUpBackgrounds()
         self.ocean = self.childNode(withName: "ocean") as! SKSpriteNode
         self.ship = self.childNode(withName: "ship") as! SKSpriteNode
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.hook = self.childNode(withName: "hook") as! SKSpriteNode
         self.bgsky = self.childNode(withName: "bgsky") as! SKSpriteNode
-        }
-    //MARK: collision detect when collision occurs
-     func didBegin(_ contact: SKPhysicsContact) {
-         print("didbegin called")
-
-         let nodeA = contact.bodyA.node
-         let nodeB = contact.bodyB.node
-
-         if (nodeA == nil || nodeB == nil) {
-             return
-         }
-         if (nodeA!.name == "ship" && nodeB!.name == "hook") {
-             // player die
-             print("ship and hook collied")
-//            let move = SKAction.moveBy(x: 0, y: 9, duration: 1)
-//            for (int i = 0 ; i < fish.size ; i++ ){
 //
-//                fish f = fish.get(i)
-//                f.run(move)
+//        self.coi = self.childNode(withName: "coin") as? SKSpriteNode
 //
-//            }
+//          self.coi.position = CGPoint(x: randomX, y: randomY)
+//          addChild(coi)
+        
+            // Add a score label
+            self.scoreLabel = SKLabelNode(text: "Score: \(self.score)")
+            self.scoreLabel.position = CGPoint(x:100, y:600)
+            self.scoreLabel.fontColor = UIColor.green
+            self.scoreLabel.zPosition = 3
+            self.scoreLabel.fontSize = 65
+            self.scoreLabel.fontName = "Avenir"
+            addChild(self.scoreLabel)
+        // Add a score label
+                   self.highscoreLabel = SKLabelNode(text: "HighScore: \(self.highscore)")
+                   self.highscoreLabel.position = CGPoint(x:100, y:500)
+        self.highscoreLabel.fontColor = UIColor.yellow
+                   self.highscoreLabel.zPosition = 3
+                   self.highscoreLabel.fontSize = 65
+                   self.highscoreLabel.fontName = "Avenir"
+                   addChild(self.highscoreLabel)
+        // Add a score label
+               self.coinsLabel = SKLabelNode(text: ": \(self.coins)")
+               self.coinsLabel.position = CGPoint(x:-200, y:555)
+               self.coinsLabel.fontColor = UIColor.orange
+               self.coinsLabel.zPosition = 3
+               self.coinsLabel.fontSize = 60
+               self.coinsLabel.fontName = "Avenir"
+               addChild(self.coinsLabel)
         
         }
-         if (nodeA!.name == "hook" && nodeB!.name == "ship") {
-            print("hook and ship are collided")
-             // player die
-            // restartPlayer()
-         }
-
-                print("COLLISION DETECTED")
-                print("Sprite 1: \(nodeA!.name)")
-                print("Sprite 2: \(nodeB!.name)")
-                print("------")
-
-     }
+  
     
     
-    func throwfish(){
-        
-        
-        
-        
-    }
+    
     //MARK: spawn fish method
      var fish:[SKSpriteNode] = []
      func spawnfish() {
@@ -162,7 +102,7 @@ class GameScene: SKScene {
 
             // generate a random x position
      let randomXPos = CGFloat.random(in: -400 ... -300)
-     let randomYPos = CGFloat.random(in: -900 ... 0)
+     let randomYPos = CGFloat.random(in: -1000 ... -200)
      jelly.position = CGPoint(x:randomXPos, y:randomYPos)
      print("fish\([random])")
 
@@ -173,41 +113,242 @@ class GameScene: SKScene {
 
            }
     
-    func createGrounds(){
-        for i in 0...5{
-            let ground = SKSpriteNode(imageNamed: "backimg")
-         //   let ground2 = SKSpriteNode(imageNamed: "wave")
+    var badfish:[SKSpriteNode] = []
+              func spawnbadfish() {
+              let fish = ["bad","bad"]
+              let random = Int.random(in: 0...1)
+              let octopus:SKSpriteNode = SKSpriteNode(imageNamed: fish[random])
 
-            ground.name = "sky"
-            //height 33
-//            ground.size = CGSize(width: (self.scene?.size.width)!, height: 33)
-//            ground.anchorPoint = CGPoint(x: 0.5, y: -21.5 )
-            ground.size = CGSize(width: (self.scene?.size.width)!, height: 3000)
-            ground.anchorPoint = CGPoint(x: 0.5, y: 0.5 )
-            ground.zPosition = -5
-            ground.position = CGPoint(x: CGFloat(i) * ground.size.width, y: -(self.frame.size.height/2))
-            
-            self.addChild(ground)
-            
-        }
-    }
+                     // generate a random x position
+              let randomXPos = CGFloat.random(in: -400 ... -300)
+              let randomYPos = CGFloat.random(in: -1000 ... -200)
+              octopus.position = CGPoint(x:randomXPos, y:randomYPos)
+
+                        // add the cat to the screen
+              addChild(octopus)
+                        // add the cat to the array
+              self.badfish.append(octopus)
+
+                    }
     
-    func moveGrounds(){
-        self.enumerateChildNodes(withName: "sky", using: ({
-            
-        (node, error) in
-            node.position.x -= 2
-            if node.position.x < -((self.scene?.size.width)!){
-                node.position.x += (self.scene?.size.width)! * 5
+    
+    
+    var goodfish:[SKSpriteNode] = []
+      func spawngoodfish() {
+      let fish = ["good","coin"]
+      let random = Int.random(in: 0...1)
+      let orangefishes:SKSpriteNode = SKSpriteNode(imageNamed: fish[random])
+
+             // generate a random x position
+      let randomXPos = CGFloat.random(in: -400 ... -300)
+      let randomYPos = CGFloat.random(in: -1000 ... -200)
+     orangefishes.position = CGPoint(x:randomXPos, y:randomYPos)
+
+                // add the cat to the screen
+      addChild(orangefishes)
+                // add the cat to the array
+      self.goodfish.append(orangefishes)
+
             }
-            
-        }))
-    }
+    
+    
+//    func alert(title: String , message: String){
+//        let alert = UIAlertController(title: "yayy!!! congrats", message: String(score), preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//
+//    }
+ 
+    
+    var caughtArray:[SKSpriteNode] = []
+
     override func update(_ currentTime: TimeInterval) {
+        
+        
+        var defaults = UserDefaults()
+        var highscore=defaults.integer(forKey: "highscore")
+
+        if(score>highscore)
+        {
+            defaults.set(score, forKey: "highscore")
+//            let alert = UIAlertController(title: "yayy!!! congrats", message: String(score), preferredStyle: .alert)
+//                  alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
+//                  alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+//
+//                  self.present(alert, animated: true,compl)
+        }
+        var highscoreshow=defaults.integer(forKey: "highscore")
+
+        highscoreLabel.text="HighSCORE: \(highscoreshow)"
+     
+
+        
+        
         numloops = numloops + 1;
         if(numloops % 50 == 0){
         spawnfish()
         }
+        if(numloops % 200 == 0){
+        spawngoodfish()
+        spawnbadfish()
+        }
+       //moving the fish to right
+        for good in goodfish {
+        good.position.x += 1
+        }
+        for bad in badfish {
+        bad.position.x += 1
+        }
+        for alltypesoffish in fish {
+        alltypesoffish.position.x += 1
+        }
+        
+    
+        if(oceanmoving == "up"){
+        let move = SKAction.moveBy(x: 0, y: 2, duration: 1)
+         self.bgsky.run(move)
+         self.ocean.run(move)
+         self.ship.run(move)
+         self.hook.position.y =  self.hook.position.y + HANGER_SPEED
+         }
+        if(oceanmoving == "down"){
+        let move = SKAction.moveBy(x: 0, y: -2, duration: 1)
+        self.bgsky.run(move)
+        self.ocean.run(move)
+        self.ship.run(move)
+        if(hook.frame.intersects(ship.frame)){
+        oceanmoving = "stop"
+        print("toched frames")
+        }}
+        if(oceanmoving == "stop"){
+        ocean.position.x = -21.627
+        ocean.position.y = -1139.267
+        bgsky.position.x = 304.06
+        bgsky.position.y = 878.291
+        ship.position.x = -21.627
+        ship.position.y = 283.573
+            
+        }
+        
+        
+        
+        let throwfish = SKAction.move(by: CGVector(dx: 300, dy: 600), duration: 7)
+                
+        for(index,gfish) in self.goodfish.enumerated(){
+                       if(hook.frame.intersects(gfish.frame)){
+                        
+                        self.coinsLabel.text = ": \(self.coins)"
+
+                        self.coins = self.coins + 1
+
+                        gfish.position.x = hook.position.x
+                        gfish.position.y = hook.position.y
+                        self.hook.position.y =  self.hook.position.y + HANGER_SPEED
+                        oceanmoving = "down"
+
+                        if(hook.position.y > 100){
+                        self.hook.position.y = 100
+                        gfish.zPosition = 1
+
+                gfish.physicsBody = SKPhysicsBody(circleOfRadius: gfish.size.width/2)
+                gfish.run(throwfish)
+
+
+
+                            }
+                        gameIsRunnig = false
+                    }
+                        else if(gameIsRunnig == true){
+                        if(hook.position.y > -500){
+
+                        self.hook.position.y = self.hook.position.y - HANGER_SPEED
+                        }
+                        }
+
+                        }
+        
+        
+        
+        
+        ////-----------
+        for (index, alltypesoffish) in self.fish.enumerated(){            if(hook.frame.intersects(alltypesoffish.frame)){
+            self.scoreLabel.text = "Score: \(self.score)"
+
+            self.score = self.score + 1
+
+            alltypesoffish.position.x = hook.position.x
+            alltypesoffish.position.y = hook.position.y
+            self.hook.position.y =  self.hook.position.y + HANGER_SPEED
+                oceanmoving = "down"
+
+            if(hook.position.y > 100){
+            self.hook.position.y = 100
+            alltypesoffish.zPosition = 1
+
+                alltypesoffish.physicsBody = SKPhysicsBody(circleOfRadius: alltypesoffish.size.width/2)
+    alltypesoffish.run(throwfish)
+               
+                
+                }
+            gameIsRunnig = false
+        }
+            else if(gameIsRunnig == true){
+            if(hook.position.y > -500){
+
+            self.hook.position.y = self.hook.position.y - HANGER_SPEED
+            }
+            }
+                
+        }
+        
+        
+//        moveGrounds()
+        
+        
+//        if (score >= 1 ){
+//          // SHOW LOSE SCREEN
+//                    let loseScene = Gameover(size: self.size)
+//                    let transitionEffect = SKTransition.flipHorizontal(withDuration: 2)
+//        //            self.view?.presentScene(loseScene)
+//                    self.view?.presentScene(loseScene, transition:transitionEffect)
+//        }
+        
+        
+             for(index,bfish) in self.badfish.enumerated(){
+                               if(hook.frame.intersects(bfish.frame)){
+                                self.score = 0
+                     self.scoreLabel.text = "Score: \(self.score)"
+//                                if(score > highscore){
+//                                    self.highscore = self.score
+//                                       }
+                                
+                                bfish.position.x = hook.position.x
+                                bfish.position.y = hook.position.y
+                                self.hook.position.y =  self.hook.position.y + HANGER_SPEED
+                                oceanmoving = "down"
+
+                                if(hook.position.y > 100){
+                                self.hook.position.y = 100
+                                bfish.zPosition = 1
+
+
+                        bfish.physicsBody = SKPhysicsBody(circleOfRadius: bfish.size.width/2)
+                        bfish.run(throwfish)
+
+
+
+                                    }
+                                gameIsRunnig = false
+                            }
+                                else if(gameIsRunnig == true){
+                                if(hook.position.y > -500){
+
+                                self.hook.position.y = self.hook.position.y - HANGER_SPEED
+                                }
+                                }
+
+                                }
+        
+       
         
     }
 
@@ -221,6 +362,7 @@ class GameScene: SKScene {
                           return
                       }
          let location = mouseTouch!.location(in: self)
+        self.hook.position.x = location.x
          let nodeTouched = atPoint(location).name
           if (nodeTouched == "hook"){
           gameIsRunnig = true
@@ -232,8 +374,3 @@ class GameScene: SKScene {
         }
     }
         }
-        
-
-    
-    
-    

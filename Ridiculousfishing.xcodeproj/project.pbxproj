@@ -16,6 +16,10 @@
 		E70C8A3B235CCB4F00E0DBF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E70C8A3A235CCB4F00E0DBF5 /* Assets.xcassets */; };
 		E70C8A3E235CCB4F00E0DBF5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E70C8A3C235CCB4F00E0DBF5 /* LaunchScreen.storyboard */; };
 		E70C8A54235EBE0600E0DBF5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70C8A53235EBE0500E0DBF5 /* Extensions.swift */; };
+		E75C475F23626576009B95A8 /* Gameover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75C475E23626576009B95A8 /* Gameover.swift */; };
+		E75C476123627442009B95A8 /* Gameover.sks in Resources */ = {isa = PBXBuildFile; fileRef = E75C476023627442009B95A8 /* Gameover.sks */; };
+		E75C476323628B27009B95A8 /* music.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75C476223628B27009B95A8 /* music.swift */; };
+		E75C476623628E52009B95A8 /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E75C476523628E52009B95A8 /* music.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		E70C8A3D235CCB4F00E0DBF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E70C8A3F235CCB4F00E0DBF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E70C8A53235EBE0500E0DBF5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		E75C475E23626576009B95A8 /* Gameover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gameover.swift; sourceTree = "<group>"; };
+		E75C476023627442009B95A8 /* Gameover.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Gameover.sks; sourceTree = "<group>"; };
+		E75C476223628B27009B95A8 /* music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = music.swift; sourceTree = "<group>"; };
+		E75C476523628E52009B95A8 /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,9 +79,21 @@
 				E70C8A3A235CCB4F00E0DBF5 /* Assets.xcassets */,
 				E70C8A3C235CCB4F00E0DBF5 /* LaunchScreen.storyboard */,
 				E70C8A3F235CCB4F00E0DBF5 /* Info.plist */,
+				E75C476423628B85009B95A8 /* music */,
+				E75C476223628B27009B95A8 /* music.swift */,
 				E70C8A53235EBE0500E0DBF5 /* Extensions.swift */,
+				E75C475E23626576009B95A8 /* Gameover.swift */,
+				E75C476023627442009B95A8 /* Gameover.sks */,
 			);
 			path = Ridiculousfishing;
+			sourceTree = "<group>";
+		};
+		E75C476423628B85009B95A8 /* music */ = {
+			isa = PBXGroup;
+			children = (
+				E75C476523628E52009B95A8 /* music.mp3 */,
+			);
+			path = music;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +159,8 @@
 				E70C8A3B235CCB4F00E0DBF5 /* Assets.xcassets in Resources */,
 				E70C8A3E235CCB4F00E0DBF5 /* LaunchScreen.storyboard in Resources */,
 				E70C8A32235CCB4C00E0DBF5 /* Actions.sks in Resources */,
+				E75C476623628E52009B95A8 /* music.mp3 in Resources */,
+				E75C476123627442009B95A8 /* Gameover.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,9 +172,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E70C8A34235CCB4C00E0DBF5 /* GameScene.swift in Sources */,
+				E75C475F23626576009B95A8 /* Gameover.swift in Sources */,
 				E70C8A36235CCB4C00E0DBF5 /* GameViewController.swift in Sources */,
 				E70C8A2E235CCB4C00E0DBF5 /* AppDelegate.swift in Sources */,
 				E70C8A54235EBE0600E0DBF5 /* Extensions.swift in Sources */,
+				E75C476323628B27009B95A8 /* music.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
